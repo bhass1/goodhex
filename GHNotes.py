@@ -90,8 +90,9 @@ class GHNSqlite():
     def setnote(self,adr,note):
         self.c.execute("delete from notes where adr=?;",
                        (adr,));
-        self.c.execute("insert into notes (adr,note) values (?,?);",
-                       (adr,note));
+        if note != "":
+            self.c.execute("insert into notes (adr,note) values (?,?);",
+                           (adr,note));
         self.db.commit();
         return;
 
