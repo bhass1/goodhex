@@ -62,6 +62,7 @@ Arrows  -- Move by one or sixteen bytes.
 h,j,k,l -- Move by one or sixteen bytes (Vim bindings).
 ESC ESC -- Back to Command Mode
 TAB     -- Advance to the next set of Notes.
+SPACE   -- Mark currently selected byte. Used to measure distances or color many bytes in annotation mode.
 
 Command Mode:
 n/p     -- Move by 0x0100 bytes.
@@ -81,7 +82,7 @@ Insert Mode:
 A       -- ASCII mode.
 
 Annotate Mode:
-0-9     -- Colors the given byte.
+0-9     -- Colors the given byte or colors entire range when a marker is set by SPACE.
 s       -- Annotates the byte with a known structure.
 n       -- Adds a text note to the byte.
 ```
