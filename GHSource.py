@@ -22,9 +22,9 @@ class GHSFileMmap():
     mm=None;
     length=-1;  #Don't yet support length limits.
     def __init__(self,
-                 filename):
+                 srcpath):
         """Opens a file by mmmap() for use within GoodHex."""
-        f=open(filename,"r+b");      #Open the file.
+        f=open(srcpath,"r+b");      #Open the file.
         mm=mmap.mmap(f.fileno(),0);  #Map the whole file.
         self.f=f;
         self.mm=mm;
@@ -48,13 +48,15 @@ class GHSFile():
     f=None;
     b=None;
     length=-1;
+    srcpath=""
     def __init__(self,
-                 filename):
+                 srcpath):
         """Opens a file by mmmap() for use within GoodHex."""
-        f=open(filename,"r+b");      #Open the file.
+        f=open(srcpath,"r+b");      #Open the file.
         b=f.read();
         self.b=b;
         self.length=len(b);
+        self.srcpath=srcpath
         f.close();
     def getbyte(self,adr):
         """Gets a byte."""
@@ -72,10 +74,10 @@ class GHSFileIhex():
     b=None;
     length=-1;  #Don't yet support length limits.
     def __init__(self,
-                 filename):
+                 srcpath):
         """Opens a file by mmmap() for use within GoodHex."""
         from intelhex import IntelHex;
-        self.ihex=IntelHex(filename);
+        self.ihex=IntelHex(srcpath);
         self.ihex.padding=None;
     def getbyte(self,adr):
         """Gets a byte."""

@@ -7,6 +7,7 @@
 # For example, Ange's multi-PE from Corkami and POC||GTFO 0x01 might
 # be annotated three ways for the three different Windows versions.
 
+import os
 
 class GHNZeroes():
     """Simple dummy class that colors bytes by value."""
@@ -35,17 +36,31 @@ class GHNSqlite():
     Berkeley DB might be a better choice for absurdly large files, but
     this ought to work for now."""
     
-    db=None;
-    srcfile=None;
-    filename=None;
-    c=None;
-    def __init__(self,source,filename="goodhex.db"):
-        self.srcfile=source;
+    db=None
+    dbpath=""
+    srcfile=""
+    srcdir=""
+    srcname=""
+    c=None
+    def __init__(self, source):
+        self.srcfile = source;
+        self.srcdir = os.path.dirname(source.srcpath)
+        if self.srcdir == "":
+            self.srcdir = "."
+        srcname = os.path.basename(source.srcpath)
+
+        dbname = "." + srcname + ".goodhexdb"
+        dbpath = (self.srcdir + "/" + dbname)
+
+        print("> Using goodhexdb: " + dbpath)
+
         import sqlite3;
-        self.db=sqlite3.connect(filename);
+        self.db = sqlite3.connect(dbpath);
         c=self.db.cursor();
-        self.c=c;
-        self.filename=filename;
+        self.c = c;
+        self.srcname = srcname;
+        self.dbpath= dbpath
+
         
         #Now init the database, if it's not already initialized.
         c.execute("create table if not exists colors(adr integer primary key,color)");
@@ -78,7 +93,7 @@ class GHNSqlite():
         self.db.commit();
     def getname(self):
         """Returns the name of the notation scheme."""
-        return self.filename;
+        return self.srcname;
     def getnote(self,adr):
         """Returns the note from the given address."""
         self.c.execute("select note from notes where adr=?", (adr,));
