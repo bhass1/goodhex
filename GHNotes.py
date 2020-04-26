@@ -10,11 +10,11 @@
 
 class GHNZeroes():
     """Simple dummy class that colors bytes by value."""
-    src=None;
+    srcfile=None;
     def __init__(self,source):
         """Initializes around the source, which ought to be used
         sparingly if at all."""
-        self.src=source;
+        self.srcfile=source;
     def getcolor(self,badr,b,adr):
         """Returns a 1-digit color for the given byte address, byte,
         and cursor address."""
@@ -36,11 +36,11 @@ class GHNSqlite():
     this ought to work for now."""
     
     db=None;
-    src=None;
+    srcfile=None;
     filename=None;
     c=None;
     def __init__(self,source,filename="goodhex.db"):
-        self.src=source;
+        self.srcfile=source;
         import sqlite3;
         self.db=sqlite3.connect(filename);
         c=self.db.cursor();
@@ -100,11 +100,11 @@ class GHNPng():
     """Simple parser for PNG files.  For now, it only annotates the
     header.  This really ought to be redone to annotate all the chunks
     as regions, once we have region support."""
-    src=None;
+    srcfile=None;
     def __init__(self,source):
         """Initializes around the source, which ought to be used
         sparingly if at all."""
-        self.src=source;
+        self.srcfile=source;
     pngheader=[0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
     pngheadernotes=["0x89, high byte is set to detect 7-bit transfers.",
                     "P, N, G to indicate the file type.",
