@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/env python3
 #
 # An attempt at a custom hex editor.
 # by Travis Goodspeed
