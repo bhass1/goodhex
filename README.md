@@ -59,6 +59,7 @@ be reached by pressing ESC twice.
 ```
 All Modes:
 Arrows  -- Move by one or sixteen bytes.
+h,j,k,l -- Move by one or sixteen bytes (Vim bindings).
 ESC ESC -- Back to Command Mode
 TAB     -- Advance to the next set of Notes.
 

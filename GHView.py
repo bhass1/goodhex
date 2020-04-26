@@ -140,13 +140,17 @@ class GHVCurses:
         """Handles a keypress."""
         
         #These commands work in any mode.
-        if key==curses.KEY_UP:
+        if (key==curses.KEY_UP or 
+            key==ord("k")):
             self.adr=self.adr-0x10;
-        elif key==curses.KEY_DOWN:
+        elif (key==curses.KEY_DOWN or
+            key==ord("j")):
             self.adr=self.adr+0x10;
-        elif key==curses.KEY_LEFT:
+        elif (key==curses.KEY_LEFT or
+            key==ord("h")):
             self.adr=self.adr-1;
-        elif key==curses.KEY_RIGHT:
+        elif (key==curses.KEY_RIGHT or
+            key==ord("l")):
             self.adr=self.adr+1;
         elif key==0x09: #TAB
             self.notesi=(self.notesi+1) % len(self.notesarray);
